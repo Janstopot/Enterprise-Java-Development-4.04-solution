@@ -1,5 +1,6 @@
 package com.example.lab402.controller;
 
+import com.example.lab402.dto.PatientDTO;
 import com.example.lab402.enums.Status;
 import com.example.lab402.model.Patient;
 import com.example.lab402.service.PatientService;
@@ -45,6 +46,20 @@ public class PatientController {
     public List<Patient> findByStatus(@RequestParam String status){
         return patientService.findPatientByStatus(Status.valueOf(status));
     }
+
+    @PostMapping("/new-patient")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Patient createNewPatient(@RequestBody PatientDTO patientDTO){
+        return patientService.createNewPatient(patientDTO);
+    }
+
+    @PutMapping("/update-patient")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Patient updatePatient(@RequestBody PatientDTO patientDTO){
+        System.out.println("IDDD" + patientDTO.getId());
+        return patientService.updatePatient(patientDTO);
+    }
+
 
 
 }

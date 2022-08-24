@@ -1,25 +1,27 @@
-package com.example.lab402.model;
+package com.example.lab402.dto;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-@Entity
-public class Patient {
-    @Id
+
+public class PatientDTO {
+
+    @NotNull
     private Long id;
+
     private String name;
+
     private LocalDate dateOfBirth;
-    @ManyToOne
-    @JoinColumn(name = "admitted_by")
-    private Employee admittedBy;
 
-    public Patient() {
-    }
+    private Long doctorId;
 
-    public Patient(Long id, String name, LocalDate dateOfBirth, Employee admittedBy) {
-        this.id = id;
+    public PatientDTO(String name, LocalDate dateOfBirth, Long doctorId) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.admittedBy = admittedBy;
+        this.doctorId = doctorId;
+    }
+
+    public PatientDTO() {
     }
 
     public Long getId() {
@@ -46,11 +48,11 @@ public class Patient {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Employee getAdmittedBy() {
-        return admittedBy;
+    public Long getDoctorId() {
+        return doctorId;
     }
 
-    public void setAdmittedBy(Employee admittedBy) {
-        this.admittedBy = admittedBy;
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 }
